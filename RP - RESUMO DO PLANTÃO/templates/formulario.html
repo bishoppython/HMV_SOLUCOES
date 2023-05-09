@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="./static/image/favicon.ico">
+	<meta charset="UTF-8">
+	<title>RP - RESUMO DO PLANTÃO</title>
+	<!--link rel="stylesheet" href=".\static\css\teste.css"-->
+	<!-- Adicionando Bootstrap -->
+	<!--link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<!--script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script-->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<style>
+		.form-group {
+			margin-bottom: 1rem;
+		}
+		textarea {
+		  height: 150px;
+		  width: 90%;
+		}
+		label {
+		  font-size: 18px; /* ajuste o tamanho da fonte conforme necessário */
+		  font-weight: bold;
+		}
+		.logo {
+		  display: block;
+		  margin: 0 auto;
+		  max-width: 100%;
+		  height: auto;
+		}
+		.btn-lg {
+			margin: 0 auto;
+		  	max-width: 100%;
+		  	height: auto;
+			width: 10%;
+			padding: 5px;
+			font-size: 24px;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<!-- Header -->
+		<!--img src=".\static\image\favicon.png" alt="Logotipo"--><br>
+		<h1 class="text-center mx-auto">:: RESUMO DO PLANTÃO :: </h1><br>
+	</div>
+	<div class="container">
+		<div class="row">
+			<!-- Primeira coluna -->
+			<div class="col-md-6">
+				<form method="POST" action="/submit" enctype="multipart/form-data">
+					<div class="form-group">
+						<!-- Adicione aqui os campos do primeiro formulário -->
+						<label for="horario">Horário Realização da Ronda:</label><br>
+						<input type="checkbox" id="diurno" name="horario" value="diurno" class="validate-checkbox">
+						<label for="diurno">Diurno</label><br>
+						<input type="checkbox" id="noturno" name="horario" value="noturno" class="validate-checkbox">
+						<label for="noturno">Noturno</label>
+					</div>
+					<div class="form-group">
+						<label for="horario">Horário Realização da Ronda:</label><br>
+							<label for="datahora">Inicio da Ronda:</label><br>
+							<input type="datetime-local" id="datahorainicio" name="datahoraini" required><br><br>
+							<label for="datahora">Final da Ronda:</label><br>
+							<input type="datetime-local" id="datahorafim" name="datahorafin" required>
+					</div>
+					<div class="form-group">
+						<label for="intercorrencias">Houve intercorrências na Ronda?</label><br>
+						<input type="checkbox" id="intercorrenciasim" name="intercorrencias" value="sim" class="intercorrencia-sim">
+						<label for="sim">Sim</label><br>
+						<input type="checkbox" id="intercorrencianao" name="intercorrencias" value="nao" class="intercorrencia-nao">
+						<label for="nao">Não</label>
+					</div>
+					<div id="intercorrencia-opcoes" style="display:none;">
+						<label for="ocorrencias">Lista de Ocorrências atendidas na Ronda:</label><br>
+						<textarea id="intercorrencias" name="ocorrencias"></textarea>
+					</div>
+					<div class="form-group">
+						<label for="chamados">Chamados Pendentes - Próximo Plantão?</label><br>
+						<input type="checkbox" id="pendencias-sim" name="chamados" value="sim" class="pendencias-sim">
+						<label for="sim">Sim</label><br>
+						<input type="checkbox" id="pendencias-nao" name="chamados" value="nao" class="pendencias-nao">
+						<label for="nao">Não</label><br>
+						<div id="pendencias-opcoes" style="display:none;">
+							<textarea id="pendencias" name="pendencias"></textarea>
+						</div>
+					</div>
+
+				<!--/form-->
+			</div>
+			<!-- Segunda coluna -->
+			<div class="col-md-4">
+				<!--form method="POST" action="/submit"-->
+					<div class="form-group">
+						<label for="equipamento">Houve Substituição de Equipamento?</label><br>
+						<input type="checkbox" id="equipamento-sim" name="equipamento" value="sim" class="equipamento-sim">
+						<label for="sim">Sim</label><br>
+						<input type="checkbox" id="equipamento-nao" name="equipamento" value="nao" class="equipamento-nao">
+						<label for="nao">Não</label><br>
+
+						<div id="equipamento-opcoes" style="display:none;">
+
+							<label for="motivo">Motivo:</label><br>
+							<input type="text" id="motivo" name="motivo"><br>
+
+							<label for="setor">Setor:</label><br>
+							<input type="text" id="setor" name="setor"><br>
+
+							<label for="modelo">Modelo:</label><br>
+							<input type="text" id="modelo" name="modelo"><br>
+
+							<label for="serie">Nº Serie:</label><br>
+							<input type="text" id="serie" name="serie"><br>
+
+							<label for="recolhido">Recolhido/Substituido:</label><br>
+							<input type="text" id="recolhido/substituido" name="recolhido/substituido"><br>
+
+							<label for="imagens">Enviar Imagens:</label><br>
+							<input type="file" id="imagens-equipamento" name="imagens-equipamento"><br><br>
+						</div>
+					</div>
+					<div class="form-group">
+					<!-- Adicione aqui os campos do segundo formulário -->
+						<label for="organizacao">Houve Organização do Setor?</label><br>
+						<input type="checkbox" id="organizacao-sim" name="organizacao" value="sim" class="organizacao-sim">
+						<label for="sim">Sim</label><br>
+						<input type="checkbox" id="organizacao-nao" name="organizacao" value="nao" class="organizacao-nao">
+						<label for="nao">Não</label><br>
+
+						<div id="organizacao-opcoes" style="display: none;">
+							<label for="organizacao_desc">Descreva a organização:</label><br>
+							<textarea id="organizacao_desc" name="organizacao_desc"></textarea><br>
+
+							<label for="organizacao_imagens">Enviar Imagens:</label><br>
+							<input type="file" id="organizacao_imagens" name="organizacao_imagens"><br>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="intercorrencias">Houve Ocorrências Atípicas?</label><br>
+						<input type="checkbox" id="ocorrencias-sim" name="intercorrencias_a" value="sim" class="ocorrencias-sim">
+						<label for="sim">Sim</label><br>
+						<input type="checkbox" id="ocorrencias-nao" name="intercorrencias_a" value="nao" class="ocorrencias-nao">
+						<label for="nao">Não</label>
+					</div>
+					<div id="ocorrencias-opcoes" style="display:none;">
+						<label for="ocorrencias">Lista de Ocorrências Fora do Padrão:</label><br>
+						<textarea id="lista_ocorrencias" name="lista_ocorrencias"></textarea>
+					</div>
+					<div class="form-group">
+						<div class="form-group">
+							<label for="intercorrencias">Considerações Finais?</label><br>
+							<input type="checkbox" id="consideracoes-sim" name="consideracoes" value="sim" class="consideracoes-sim">
+							<label for="sim">Sim</label><br>
+							<input type="checkbox" id="consideracoes-nao" name="consideracoes" value="nao" class="consideracoes-nao">
+							<label for="nao">Não</label>
+						</div>
+						<div id="consideracoes-opcoes" style="display:none;">
+							<label for="consideracoes">Considerações Finais:</label><br>
+							<textarea id="consideracoes_f" name="consideracoes_f"></textarea><br>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="name"> Plantonista:</label><br>
+						<input type="text" id="platonista" name="platonista"><br><br>
+					</div>
+					<button type="submit" id="Enviar" value="Enviar">Enviar</button>
+				</form>
+
+			</div>
+		</div>
+	</div><br><br>
+	<div class="form-group text-center">
+
+</div>
+	<!-- Adicionando jQuery, Popper.js e Bootstrap -->
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"
+	    integrity="sha384-Pt97B/KlljJpttA+PDRlHCyVhQ5q5WC5V7clNCEbX9V7R/rMXbA1V7+yN+54x11r"
+	    crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+	<script src="/static/js/equipamento.js"></script>
+	<script src="/static/js/organizacao.js"></script>
+	<!--script src="/static/js/validade.js"></script-->
+	<script src="/static/js/intercorrencia.js"></script>
+	<script src="/static/js/consideracoes.js"></script>
+	<script src="/static/js/pendencias.js"></script>
+	<script src="/static/js/ocorrencias.js"></script>
+	<script src="/static/js/checkbox.js"></script>
+</body>
+</html>
